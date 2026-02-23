@@ -26,7 +26,7 @@
     <section class="card" aria-label="Contact form">
       <h1>Contact Us</h1>
 
-      <form class="grid" action="#" method="post" novalidate>
+      <form id="contactForm" data-js="contact-form" class="grid" action="#" method="post" novalidate>
         <!-- First / Last -->
         <div class="field">
           <label for="firstName">First Name <span class="req">*</span></label>
@@ -53,12 +53,12 @@
 
           <div class="radio-row" role="radiogroup" aria-label="Query type">
             <label class="radio-card">
-              <input type="radio" name="queryType" />
+              <input type="radio" name="queryType" value="general" />
               <span>General Enquiry</span>
             </label>
 
             <label class="radio-card">
-              <input type="radio" name="queryType" />
+              <input type="radio" name="queryType" value="support" />
               <span>Support Request</span>
             </label>
           </div>
@@ -84,10 +84,11 @@
 
         <!-- Submit -->
         <div class="actions span-2">
-          <button class="btn" type="button">Submit</button>
+          <button class="btn" type="submit">Submit</button>
         </div>
       </form>
     </section>
   </main>
+<script src="scripts/main.js" defer></script>
 </body>
 </html>

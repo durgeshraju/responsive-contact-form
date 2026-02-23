@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="css/styles.css" text="text/css" />
+</head>
+
+<!--
+  To preview states (no JS):
+  - Normal:   <body>
+  - Error:    <body class="state-error">
+  - Success:  <body class="state-success">
+-->
+<body>
+  <div class="toast" role="status" aria-live="polite">
+    <div class="icon" aria-hidden="true">✓</div>
+    <div>
+      <h3>Message Sent!</h3>
+      <p>Thanks for completing the form. We&#39;ll be in touch soon!</p>
+    </div>
+  </div>
+
+  <main class="page">
+    <section class="card" aria-label="Contact form">
+      <h1>Contact Us</h1>
+
+      <form class="grid" action="#" method="post" novalidate>
+        <!-- First / Last -->
+        <div class="field">
+          <label for="firstName">First Name <span class="req">*</span></label>
+          <input id="firstName" class="control" type="text" placeholder="" />
+          <div class="hint">This field is required</div>
+        </div>
+
+        <div class="field">
+          <label for="lastName">Last Name <span class="req">*</span></label>
+          <input id="lastName" class="control" type="text" placeholder="" />
+          <div class="hint">This field is required</div>
+        </div>
+
+        <!-- Email -->
+        <div class="field span-2">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input id="email" class="control" type="email" placeholder="email@example.com" />
+          <div class="hint">Please enter a valid email address</div>
+        </div>
+
+        <!-- Query type -->
+        <div class="field span-2">
+          <label>Query Type <span class="req">*</span></label>
+
+          <div class="radio-row" role="radiogroup" aria-label="Query type">
+            <label class="radio-card">
+              <input type="radio" name="queryType" />
+              <span>General Enquiry</span>
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="queryType" />
+              <span>Support Request</span>
+            </label>
+          </div>
+
+          <div class="hint">Please select a query type</div>
+        </div>
+
+        <!-- Message -->
+        <div class="field span-2">
+          <label for="message">Message <span class="req">*</span></label>
+          <textarea id="message" class="control" placeholder=""></textarea>
+          <div class="hint">This field is required</div>
+        </div>
+
+        <!-- Consent -->
+        <div class="field span-2">
+          <div class="consent">
+            <input id="consent" type="checkbox" />
+            <label for="consent">I consent to being contacted by the team <span class="req">*</span></label>
+          </div>
+          <div class="hint">To submit this form, please consent to being contacted</div>
+        </div>
+
+        <!-- Submit -->
+        <div class="actions span-2">
+          <button class="btn" type="button">Submit</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

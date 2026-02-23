@@ -213,7 +213,7 @@
       font-size: 13px;
       color: var(--error);
       display: none;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     body.state-error .hint{ display: block; }

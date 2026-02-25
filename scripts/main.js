@@ -5,7 +5,7 @@ const getEl = (value, type = "selector") => {
     )
 };
 
-// Storing elements in a object
+// object: a container of DOM references.
 
 const refs = {
     firstName: getEl("#firstName"),
@@ -13,14 +13,15 @@ const refs = {
     email: getEl("#email"),
     message: getEl("#message"),
     consent: getEl('#consent'),
-    queryTypeOptions: document
+    queryTypeOptions: document.querySelectorAll('input[name="queryType"]')
 };
+
 
 // Form Submit handler
 
 const formSubmitHandler = (e) => {
-    e.preventDefault();
-    console.log('form suubmitted!');
+  e.preventDefault();  
 };
+
 
 getEl('[data-js="contact-form"]').addEventListener('submit', formSubmitHandler);

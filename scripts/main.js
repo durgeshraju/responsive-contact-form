@@ -29,6 +29,10 @@ const hintMap = {
   queryType: refs.queryTypeOptions[0].closest('.field').querySelector('.hint')
 }
 
+// Flag for tracking for submitted
+
+let submitted = false;
+console.log('submitted is outer:', submitted);
 
 // validateForm with per-field falsy checks and errors object
 
@@ -70,17 +74,10 @@ const renderErrors = (errors) => {
 }
 
 // Form Submit handler
-
 const formSubmitHandler = (e) => {
   e.preventDefault(); 
-  const formData = {
-    firstName: refs.firstName.value.trim(),
-    lastName: refs.lastName.value.trim(),
-    email: refs.email.value.trim(),
-    message: refs.message.value.trim(),
-    consent: refs.consent.checked,
-    queryType: chooseQueryType()
-  }
+  submitted = true;
+  const formData = getFormData();  
   const errors = validateForm(formData);
 
   if(Object.keys(errors).length > 0){
@@ -94,5 +91,38 @@ const formSubmitHandler = (e) => {
     }, 2000);
   }
 };
+
+const getFormData = () => {
+    const formData = {
+    firstName: refs.firstName.value.trim(),
+    lastName: refs.lastName.value.trim(),
+    email: refs.email.value.trim(),
+    message: refs.message.value.trim(),
+    consent: refs.consent.checked,
+    queryType: chooseQueryType()
+  }
+  return formData
+}
+
+// Attach blur listeners to all fields for inline validation after first submit
+
+const fieldElements = [
+    refs.firstName, 
+    refs.lastName, 
+    refs.email, 
+    refs.message, 
+    refs.consent
+];
+
+fieldElements.forEach((field) => {
+  field.addEventListener('blur', () => {
+      if(!submitted) {
+        return
+      }
+    const formData = getFormData();
+    const errors = validateForm(formData);
+    renderErrors(errors);
+  });
+});
 
 getEl('[data-js="contact-form"]').addEventListener('submit', formSubmitHandler);

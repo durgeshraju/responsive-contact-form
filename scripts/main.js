@@ -40,7 +40,8 @@ const validateForm = (formData) => {
   if(!formData.lastName){
     errors.lastName = true
   }
-  if(!formData.email){
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
+  if(!formData.email || !regex.test(formData.email)){
     errors.email = true
   }
   if(!formData.queryType){
@@ -80,7 +81,6 @@ const formSubmitHandler = (e) => {
     consent: refs.consent.checked,
     queryType: chooseQueryType()
   }
-
   const errors = validateForm(formData);
 
   if(Object.keys(errors).length > 0){

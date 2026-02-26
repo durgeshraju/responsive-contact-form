@@ -33,27 +33,38 @@ const hintMap = {
 // validateForm with per-field falsy checks and errors object
 
 const validateForm = (formData) => {
-  const errros = {};  
+  const errors = {};  
   if(!formData.firstName){
-    errros.firstName = true;
+    errors.firstName = true;
   }
   if(!formData.lastName){
-    errros.lastName = true
+    errors.lastName = true
   }
   if(!formData.email){
-    errros.email = true
+    errors.email = true
   }
   if(!formData.queryType){
-    errros.queryType = true;
+    errors.queryType = true;
   }
   if(!formData.message){
-    errros.message = true
+    errors.message = true
   }
   if(!formData.consent){
-    errros.consent = true
+    errors.consent = true
   }
   
-  return errros;
+  return errors;
+}
+
+
+const renderErrors = (errors) => {
+  Object.values(hintMap).forEach((element) => {
+      element.style.display = "none";
+  });
+
+  Object.keys(errors).forEach((key) => {
+    hintMap[key].style.display = "block";
+  });
 }
 
 
@@ -63,13 +74,14 @@ const formSubmitHandler = (e) => {
   e.preventDefault(); 
   const formData = {
     firstName: refs.firstName.value.trim(),
-    lastName: refs.lastName.value,
-    email: refs.email.value,
-    message: refs.message.value,
+    lastName: refs.lastName.value.trim(),
+    email: refs.email.value.trim(),
+    message: refs.message.value.trim(),
     consent: refs.consent.checked,
     queryType: chooseQueryType()
   }
-  console.log(validateForm(formData))
+  const errors = validateForm(formData);  
+  console.log('renderErrors is:', renderErrors(errors));
 };
 
 getEl('[data-js="contact-form"]').addEventListener('submit', formSubmitHandler);

@@ -18,6 +18,18 @@ const refs = {
 
 const chooseQueryType = () => Array.from(refs.queryTypeOptions).find(radio => radio.checked)?.value;
 
+// hintMap with closest/querySelector chain
+
+const hintMap = {
+  firstName: refs.firstName.closest('.field').querySelector('.hint'),
+  lastName: refs.lastName.closest('.field').querySelector('.hint'),
+  email: refs.email.closest('.field').querySelector('.hint'),
+  message: refs.message.closest('.field').querySelector('.hint'),
+  consent: refs.consent.closest('.field').querySelector('.hint'),
+  queryType: refs.queryTypeOptions[0].closest('.field').querySelector('.hint')
+}
+
+
 // validateForm with per-field falsy checks and errors object
 
 const validateForm = (formData) => {

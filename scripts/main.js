@@ -18,20 +18,46 @@ const refs = {
 
 const chooseQueryType = () => Array.from(refs.queryTypeOptions).find(radio => radio.checked)?.value;
 
+// validateForm with per-field falsy checks and errors object
+
+const validateForm = (formData) => {
+  const errros = {};  
+  if(!formData.firstName){
+    errros.firstName = true;
+  }
+  if(!formData.lastName){
+    errros.lastName = true
+  }
+  if(!formData.email){
+    errros.email = true
+  }
+  if(!formData.queryType){
+    errros.queryType = true;
+  }
+  if(!formData.message){
+    errros.message = true
+  }
+  if(!formData.consent){
+    errros.consent = true
+  }
+  
+  return errros;
+}
+
 
 // Form Submit handler
 
 const formSubmitHandler = (e) => {
   e.preventDefault(); 
   const formData = {
-    firstName: refs.firstName.value,
+    firstName: refs.firstName.value.trim(),
     lastName: refs.lastName.value,
     email: refs.email.value,
     message: refs.message.value,
     consent: refs.consent.checked,
     queryType: chooseQueryType()
   }
-  console.log('consent isChecked:', formData.queryType)
+  console.log(validateForm(formData))
 };
 
 getEl('[data-js="contact-form"]').addEventListener('submit', formSubmitHandler);

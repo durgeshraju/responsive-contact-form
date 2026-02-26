@@ -56,6 +56,7 @@ const validateForm = (formData) => {
   return errors;
 }
 
+// renderErrors to show and hide hints based on validation errors
 
 const renderErrors = (errors) => {
   Object.values(hintMap).forEach((element) => {
@@ -66,7 +67,6 @@ const renderErrors = (errors) => {
     hintMap[key].style.display = "block";
   });
 }
-
 
 // Form Submit handler
 
@@ -80,8 +80,19 @@ const formSubmitHandler = (e) => {
     consent: refs.consent.checked,
     queryType: chooseQueryType()
   }
-  const errors = validateForm(formData);  
-  console.log('renderErrors is:', renderErrors(errors));
+
+  const errors = validateForm(formData);
+
+  if(Object.keys(errors).length > 0){
+    renderErrors(errors);
+  }
+  else {
+    document.body.classList.add('state-success');
+    getEl('#contactForm').reset();
+    setTimeout(() => {    
+    document.body.classList.remove('state-success');
+    }, 2000);
+  }
 };
 
 getEl('[data-js="contact-form"]').addEventListener('submit', formSubmitHandler);

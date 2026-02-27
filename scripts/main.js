@@ -1,3 +1,6 @@
+// API URL:
+const API_URL = 'https://httpbin.org/post';
+
 // Element refreance helper
 const getEl = (value, type = "selector") => {
     return(
@@ -32,7 +35,6 @@ const hintMap = {
 // Flag for tracking for submitted
 
 let submitted = false;
-console.log('submitted is outer:', submitted);
 
 // validateForm with per-field falsy checks and errors object
 
@@ -73,8 +75,27 @@ const renderErrors = (errors) => {
   });
 }
 
+const submitFormData = async (formData) => {
+  try{
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(formData)
+  });
+  if(!response.ok){
+    throw new Error (`Server error: ${response.status}`);
+  }
+  }
+  catch(error){
+    console.error(error.message);
+    throw error;
+  }
+}
+
 // Form Submit handler
-const formSubmitHandler = (e) => {
+const formSubmitHandler = async (e) => {
   e.preventDefault(); 
   submitted = true;
   const formData = getFormData();  
@@ -88,7 +109,8 @@ const formSubmitHandler = (e) => {
     getEl('#contactForm').reset();
     setTimeout(() => {    
     document.body.classList.remove('state-success');
-    }, 2000);
+    }, 2000);    
+    await submitFormData(formData);    
   }
 };
 
@@ -107,10 +129,10 @@ const getFormData = () => {
 // Attach blur listeners to all fields for inline validation after first submit
 
 const fieldElements = [
-    refs.firstName, 
-    refs.lastName, 
-    refs.email, 
-    refs.message, 
+    refs.firstName,
+    refs.lastName,
+    refs.email,
+    refs.message,
     refs.consent
 ];
 
